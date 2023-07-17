@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 
 import com.roaa.internship.spring.data.jpa.entity.Course;
+import com.roaa.internship.spring.data.jpa.entity.Student;
 import com.roaa.internship.spring.data.jpa.entity.Teacher;
 
 import org.springframework.data.domain.PageRequest;
@@ -102,5 +103,30 @@ public class CourseRepositoryTest {
 	    }
 
 
+	  @Test
+	  public void saveCourseWithStudentAndTeacher() {
+		  
+		   Teacher teacher = Teacher.builder()
+	                .firstName("Lizze")
+	                .lastName("Morgan")
+	                .build();
+
+	        Student student = Student.builder()
+	                .firstName("Abhishek")
+	                .lastName("Singh")
+	                .emailId("abhishek@gmail.com")
+	                .build();
+
+	        Course course = Course
+	                .builder()
+	                .title("AI")
+	                .credit(12)
+	                .teacher(teacher)
+	                .build();
+
+	        course.addStudents(student);
+
+	        courseRepository.save(course);
+	  }
 
 }
